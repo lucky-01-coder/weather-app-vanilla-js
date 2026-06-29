@@ -1,10 +1,50 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Weather App</title>
+    <title>🌦️ RituDarpan</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header>
+      <div class="logo">
+        🌦️<span class="logo-name"
+          >Ritu<span class="last-name">Darpan</span></span
+        >
+      </div>
+    </header>
+
+    <main>
+      <section id="search-section">
+        <span id="location">📍Location</span>
+        <span class="search-icon">🔍</span
+        ><input type="search" name="search box" id="search-box" />
+        <button id="search-btn">Search</button>
+      </section>
+      <section id="weather-card">
+        <div id="weather-icon">🌦️</div>
+        <div id="temp-display">31°C</div>
+        <div id="weather-cond">Sunny</div>
+        <div id="city-name">Varanasi</div>
+        <div id="day-date">29 June 2026, Monday</div>
+        <div id="feel-like">35°C</div>
+      </section>
+      <section class="weather-details">
+        <div class="detail-card humidity">
+          <span>💧</span>
+          <p>Humidity</p>
+          <span>62%</span>
+        </div>
+        <div class="detail-card wind-speed">
+          <span>💨</span>
+          <p>Wind Speed</p>
+          <span>7 km/h</span>
+        </div>
+      </section>
+    </main>
+    <footer class="sun-timing">
+      <div id="sun-rise"></div>
+      <div id="sun-set"></div>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
