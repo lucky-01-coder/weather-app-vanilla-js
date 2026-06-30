@@ -3,41 +3,55 @@
   <head>
     <title>🌦️ RituDarpan</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/dcb8d7c986.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
       <div class="logo">
-        🌦️<span class="logo-name"
-          >Ritu<span class="last-name">Darpan</span></span
-        >
+        <img src="../assests/images/logo.png" alt="RituDarpan Logo" />
+        <h1 class="logo-name">
+          Ritu<span class="last-name" style="color: whitesmoke">Darpan</span>
+        </h1>
       </div>
     </header>
 
     <main>
       <section id="search-section">
-        <span id="location">📍Location</span>
-        <span class="search-icon">🔍</span
-        ><input type="search" name="search box" id="search-box" />
-        <button id="search-btn">Search</button>
+        <p id="city-name"><i class="fa-solid fa-location-dot"></i>Location</p>
+        <div id="search-box">
+          <button id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input type="search" name="search box" id="search-input" />
+        </div>
       </section>
       <section id="weather-card">
-        <div id="weather-icon">🌦️</div>
-        <div id="temp-display">31°C</div>
-        <div id="weather-cond">Sunny</div>
-        <div id="city-name">Varanasi</div>
-        <div id="day-date">29 June 2026, Monday</div>
-        <div id="feel-like">35°C</div>
+        <h1 id="weather-icon" style="font-size: 80px">🌦️</h1>
+        <p id="temp-display" style="font-size: 50px">31°C</p>
+        <p id="weather-cond">Sunny</p>
+        <p id="day-date">29 June 2026, Monday</p>
+        <hr />
+        <p id="feel-like">Feels Like 35°C</p>
       </section>
       <section class="weather-details">
-        <div class="detail-card humidity">
-          <span>💧</span>
+        <div class="detail-card">
+          <span><i class="fa-solid fa-droplet"></i></span>
           <p>Humidity</p>
-          <span>62%</span>
+          <span id="humidity">62%</span>
         </div>
-        <div class="detail-card wind-speed">
-          <span>💨</span>
+        <div class="detail-card">
+          <span><i class="fa-solid fa-wind"></i></span>
           <p>Wind Speed</p>
-          <span>7 km/h</span>
+          <span id="wind-speed">7 km/h</span>
         </div>
       </section>
     </main>
