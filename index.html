@@ -50,20 +50,38 @@
       </section>
       <section class="weather-details">
         <div class="detail-card">
-          <span><i class="fa-solid fa-droplet"></i></span>
+          <span class="detail-icon"><i class="fa-solid fa-droplet"></i></span>
           <p>Humidity</p>
-          <span id="humidity">62%</span>
+          <span id="humidity" class="detail-value">62%</span>
         </div>
         <div class="detail-card">
-          <span><i class="fa-solid fa-wind"></i></span>
+          <span class="detail-icon"><i class="fa-solid fa-wind"></i></span>
           <p>Wind Speed</p>
-          <span id="wind-speed">7 km/h</span>
+          <span id="wind-speed" class="detail-value">7 km/h</span>
+        </div>
+        <div class="detail-card">
+          <span class="detail-icon"><i class="fa-solid fa-eye"></i></span>
+          <p>Visibility</p>
+          <span id="visibility" class="detail-value">3 kms</span>
+        </div>
+        <div class="detail-card">
+          <span class="detail-icon"><i class="fa-solid fa-gauge"></i></span>
+          <p>Pressure</p>
+          <span id="pressure" class="detail-value">1012 hPa</span>
         </div>
       </section>
     </main>
-    <footer class="sun-timing">
-      <div id="sun-rise"></div>
-      <div id="sun-set"></div>
+    <footer class="sun-timing-section">
+      <div class="sun-timing">
+        <span class="sun-icon"><i class="fa-solid fa-sun"></i></span>
+        <p>Sunrise</p>
+        <span id="sun-rise">5:18 AM</span>
+      </div>
+      <div class="sun-timing">
+        <span class="sun-icon"><i class="fa-solid fa-cloud-sun"></i></span>
+        <p>Sunset</p>
+        <span id="sun-set">6:47 PM</span>
+      </div>
     </footer>
     <script src="script.js"></script>
   </body>

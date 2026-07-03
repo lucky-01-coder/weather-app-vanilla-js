@@ -2,6 +2,8 @@
   --primary-text-color: #1a2e40;
   --active-state-color: #ffac1c;
   --darpan-glass: #f4f7f6;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
 
   /* Frosted Glass Effect For Weather Card */
 
@@ -39,7 +41,7 @@
 body {
   min-height: 100vh;
   background: var(--body-gradient);
-  color: white;
+  color: var(--text-primary);
   /* display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -69,7 +71,7 @@ header {
 
 /*Darpan style*/
 .last-name {
-  color: whitesmoke;
+  color: var(--text-primary);
 }
 
 .logo img {
@@ -90,7 +92,7 @@ header {
 
 #search-box {
   height: 50px;
-  width: 290px;
+  width: min(320px, 90vw);
   padding: 0 8px;
   background: var(--frosted-glass-background);
   backdrop-filter: var(--frosted-glass-blur);
@@ -106,11 +108,15 @@ header {
   align-items: center;
   /* gap: 20px; */
 }
+#search-box:focus-within {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
 
 #search-input {
   /* height: 35px; */
   /* width: auto; */
-  color: whitesmoke;
+  color: var(--text-primary);
   flex: 1;
   border-radius: 12px;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04); */
@@ -120,6 +126,7 @@ header {
   /* margin-right: 5px; */
   padding: 10px;
   transition: all 0.2s ease-in-out;
+  caret-color: white;
 }
 #search-input:focus {
   outline: none;
@@ -134,7 +141,7 @@ header {
 #search-btn {
   background: var(--active-state-color);
   /* background: none; */
-  color: whitesmoke;
+  color: var(--text-primary);
   padding: 8px 18px;
   /* margin-right: 15px; */
   border: none;
@@ -145,7 +152,7 @@ header {
   transition: all 0.2s ease-in-out;
 }
 #search-btn:hover {
-  transform: scale(1.03);
+  transform: translateY(-2px);
   background-color: #d2890b;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
@@ -209,14 +216,16 @@ header {
 
 #day-date {
   font-size: 14px;
-  opacity: 0.8;
+  color: var(--text-secondary);
 }
 
 /*Weather Details*/
 .weather-details {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 500px;
+  margin: auto;
   padding: 10px;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -224,19 +233,122 @@ header {
 
 /*Detail Card*/
 .detail-card {
-  background-color: #1a2e40;
-  padding: 10px;
+  /* background-color: #1a2e40; */
+  padding: 18px;
   height: fit-content;
-  width: 20vw;
+  /* width: 160px; */
   background: var(--frosted-glass-background);
   backdrop-filter: var(--frosted-glass-blur);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 8px;
+
   transition: all 0.2s ease;
 }
 
-#weather-card:hover,
-.detail-card:hover {
+.detail-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.detail-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.detail-card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/*Hover Effect*/
+#weather-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.15);
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/*Sun Timing Section*/
+.sun-timing-section {
+  width: min(500px, 90%);
+  margin: 20px auto 30px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.sun-timing {
+  background: var(--frosted-glass-background);
+  backdrop-filter: var(--frosted-glass-blur);
+  border-radius: 12px;
+  padding: 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  text-align: center;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+}
+
+.sun-timing:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon Circle */
+
+.sun-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 22px;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Label */
+
+.sun-timing p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Time */
+
+#sun-rise,
+#sun-set {
+  font-size: 22px;
+  font-weight: 700;
 }
