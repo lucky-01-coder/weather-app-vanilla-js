@@ -185,7 +185,12 @@ header {
 }
 
 #weather-icon {
-  font-size: 80px;
+  width: 180px;
+  height: 180px;
+
+  object-fit: contain;
+  display: block;
+  user-select: none;
 }
 
 #temp-display {

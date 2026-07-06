@@ -43,6 +43,14 @@ const days = [
   "Saturday",
 ];
 
+resetUI();
+
+weatherIcon.onerror = () => {
+  weatherIcon.src = "./assets/icons/weather.png";
+};
+
+let isLoading = false;
+
 async function fetchWeather(city) {
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
@@ -54,6 +62,7 @@ async function fetchWeather(city) {
 
     const data = await response.json();
     if (Number(data.cod) !== 200) {
+      resetUI();
       alert(data.message);
       return;
     }
@@ -61,6 +70,7 @@ async function fetchWeather(city) {
     updateUI(data);
   } catch (error) {
     console.error(error);
+    resetUI();
     alert(
       "Something went wrong. Please check your internet connection and try again.",
     );
@@ -132,6 +142,11 @@ function updateUI(data) {
 
   //date & day display
   dayDate.textContent = formatDate(data.dt, timezone);
+
+  //Weather icon update
+  const iconCode = data.weather[0].icon;
+
+  weatherIcon.src = `./assets/icons/${iconCode}.png`;
 }
 
 async function searchCity() {
@@ -142,12 +157,18 @@ async function searchCity() {
     return;
   }
 
+  if (isLoading) return;
+
+  isLoading = true;
+
   searchBtn.disabled = true;
   searchBtn.textContent = "Loading...";
 
   try {
     await fetchWeather(city);
   } finally {
+    isLoading = false;
+
     searchBtn.disabled = false;
     searchBtn.textContent = "Search";
 
@@ -156,10 +177,27 @@ async function searchCity() {
   }
 }
 
+function resetUI() {
+  tempDisplay.textContent = "Search a city";
+  weatherCond.textContent = "";
+  cityNames.forEach((city) => {
+    city.innerHTML = "";
+  });
+  dayDate.textContent = "";
+  feelLike.textContent = "";
+  humidity.textContent = "";
+  windSpeed.textContent = "";
+  visibility.textContent = "";
+  pressure.textContent = "";
+  sunrise.textContent = "";
+  sunset.textContent = "";
+  weatherIcon.src = `./assets/icons/weather.png`;
+}
+
 searchBtn.addEventListener("click", searchCity);
 
 searchInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+  if (event.key === "Enter" && !isLoading) {
     searchCity();
   }
 });
