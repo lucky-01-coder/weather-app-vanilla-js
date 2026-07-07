@@ -43,10 +43,40 @@ const days = [
   "Saturday",
 ];
 
+const weatherBackgrounds = {
+  "01d": "sunny-day",
+  "01n": "clear-night",
+
+  "02d": "few-clouds",
+  "02n": "few-clouds",
+
+  "03d": "scattered-clouds",
+  "03n": "scattered-clouds",
+
+  "04d": "broken-clouds",
+  "04n": "broken-clouds",
+
+  "09d": "shower-rain",
+  "09n": "shower-rain",
+
+  "10d": "rain",
+  "10n": "rain",
+
+  "11d": "thunder",
+  "11n": "thunder",
+
+  "13d": "snow",
+  "13n": "snow",
+
+  "50d": "mist",
+  "50n": "mist",
+};
+
 resetUI();
 
 weatherIcon.onerror = () => {
   weatherIcon.src = "./assets/icons/weather.png";
+  weatherIcon.classList.remove("icon-hidden");
 };
 
 let isLoading = false;
@@ -146,7 +176,27 @@ function updateUI(data) {
   //Weather icon update
   const iconCode = data.weather[0].icon;
 
-  weatherIcon.src = `./assets/icons/${iconCode}.png`;
+  //hide current icon
+  weatherIcon.classList.add("icon-hidden");
+
+  //change icon after small delay
+  setTimeout(() => {
+    weatherIcon.src = `./assets/icons/${iconCode}.png`;
+  }, 180);
+
+  //show new icon after image loads
+  weatherIcon.onload = () => {
+    weatherIcon.classList.remove("icon-hidden");
+  };
+
+  //background change
+  document.body.className = "";
+
+  const bgClass = weatherBackgrounds[iconCode];
+
+  if (bgClass) {
+    document.body.classList.add(bgClass);
+  }
 }
 
 async function searchCity() {
@@ -192,6 +242,9 @@ function resetUI() {
   sunrise.textContent = "";
   sunset.textContent = "";
   weatherIcon.src = `./assets/icons/weather.png`;
+  weatherIcon.classList.remove("icon-hidden");
+  document.body.className = "";
+  document.body.classList.add("shower-rain");
 }
 
 searchBtn.addEventListener("click", searchCity);
