@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>🌦️ RituDarpan</title>
+    <title>🌦️ ऋतुDarpan</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,11 +18,8 @@
     <header>
       <div class="logo">
         <img src="../assets/images/logo.png" alt="RituDarpan Logo" />
-        <h1 class="logo-name">Ritu<span class="last-name">Darpan</span></h1>
+        <h1 class="logo-name">ऋतु<span class="last-name">Darpan</span></h1>
       </div>
-    </header>
-
-    <main>
       <section id="search-section">
         <p class="city-name"></p>
         <div id="search-box">
@@ -36,6 +33,9 @@
           <button id="search-btn" type="button">Search</button>
         </div>
       </section>
+    </header>
+
+    <main>
       <section id="weather-card">
         <img id="weather-icon" src="" alt="Weather Icon" />
         <p id="temp-display">Search a city</p>
@@ -66,20 +66,19 @@
           <p>Pressure</p>
           <span id="pressure" class="detail-value"></span>
         </div>
+        <div class="sun-timing">
+          <span class="sun-icon"><i class="fa-solid fa-sun"></i></span>
+          <p>Sunrise</p>
+          <span id="sun-rise"></span>
+        </div>
+        <div class="sun-timing">
+          <span class="sun-icon"><i class="fa-solid fa-cloud-sun"></i></span>
+          <p>Sunset</p>
+          <span id="sun-set"></span>
+        </div>
       </section>
     </main>
-    <footer class="sun-timing-section">
-      <div class="sun-timing">
-        <span class="sun-icon"><i class="fa-solid fa-sun"></i></span>
-        <p>Sunrise</p>
-        <span id="sun-rise"></span>
-      </div>
-      <div class="sun-timing">
-        <span class="sun-icon"><i class="fa-solid fa-cloud-sun"></i></span>
-        <p>Sunset</p>
-        <span id="sun-set"></span>
-      </div>
-    </footer>
+    <!-- <footer class="sun-timing-section"></footer> -->
     <script src="script.js"></script>
   </body>
 </html>

@@ -53,12 +53,27 @@ body {
 
 /*Header */
 header {
+  height: 90px;
   margin-bottom: 10px;
   position: sticky;
   top: 0;
   background: var(--frosted-glass-background);
   backdrop-filter: var(--frosted-glass-blur);
   z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(420px, 1.6fr) minmax(340px, 1fr);
+  gap: 32px;
+
+  width: min(1200px, 95%);
+  margin: 40px auto;
+  align-items: start;
 }
 
 /*Logo*/
@@ -87,10 +102,11 @@ header {
 /*Search Section*/
 #search-section {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  gap: 20px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
 }
 
 #search-box {
@@ -173,17 +189,21 @@ header {
     0 4px 12px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.03);
 
-  height: fit-content;
-  width: min(500px, 90%);
-  margin: auto;
+  height: 100%;
+  min-height: 560px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding: 20px;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   /* align-content: space-evenly; */
   gap: 12px;
+
+  /* grid-row: span 3; */
   transition: all 0.25s ease;
 }
 
@@ -239,10 +259,11 @@ header {
 .weather-details {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 500px;
-  margin: auto;
-  padding: 10px;
+  gap: 24px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -250,8 +271,9 @@ header {
 /*Detail Card*/
 .detail-card {
   /* background-color: #1a2e40; */
-  padding: 18px;
+  padding: 14px;
   height: fit-content;
+  min-height: 165px;
   /* width: 160px; */
   background: var(--frosted-glass-background);
   backdrop-filter: var(--frosted-glass-blur);
@@ -264,7 +286,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
+  /* flex: 1; */
   gap: 8px;
 
   transition: all 0.2s ease;
@@ -304,7 +326,7 @@ header {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/*Sun Timing Section*/
+/* Sun Timing Section
 .sun-timing-section {
   width: min(500px, 90%);
   margin: 20px auto 30px;
@@ -312,13 +334,14 @@ header {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-}
+} */
 
 .sun-timing {
   background: var(--frosted-glass-background);
   backdrop-filter: var(--frosted-glass-blur);
   border-radius: 12px;
   padding: 18px;
+  min-height: 165px;
 
   display: flex;
   flex-direction: column;

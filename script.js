@@ -96,6 +96,7 @@ async function fetchWeather(city) {
       alert(data.message);
       return;
     }
+    console.log(data);
 
     updateUI(data);
   } catch (error) {
