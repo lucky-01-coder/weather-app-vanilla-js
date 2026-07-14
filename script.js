@@ -1,5 +1,6 @@
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
+const locationBtn = document.querySelector("#location-btn");
 
 const cityNames = document.querySelectorAll(".city-name");
 const tempDisplay = document.querySelector("#temp-display");
@@ -15,6 +16,8 @@ const pressure = document.querySelector("#pressure");
 
 const sunrise = document.querySelector("#sun-rise");
 const sunset = document.querySelector("#sun-set");
+
+const toastArea = document.querySelector("#toast");
 
 const API_KEY = "c58bc56b08a9b09689154cb47412e873";
 
@@ -93,18 +96,39 @@ async function fetchWeather(city) {
     const data = await response.json();
     if (Number(data.cod) !== 200) {
       resetUI();
-      alert(data.message);
+      showToast(data.message);
       return;
     }
     console.log(data);
+
+    localStorage.setItem("lastCity", data.name);
+    updateUI(data);
+  } catch (error) {
+    console.error(error);
+    resetUI();
+    showToast(
+      "Something went wrong. Please check your internet connection and try again.",
+    );
+  }
+}
+
+async function fetchWeatherByCoords(lat, lon) {
+  try {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Request Failed");
+    }
+
+    const data = await response.json();
 
     updateUI(data);
   } catch (error) {
     console.error(error);
     resetUI();
-    alert(
-      "Something went wrong. Please check your internet connection and try again.",
-    );
+    showToast("Unable to fetch weather for your location.");
   }
 }
 
@@ -204,7 +228,7 @@ async function searchCity() {
   const city = searchInput.value.trim();
 
   if (city === "") {
-    alert("Please enter a city name.");
+    showToast("Please enter a city name.");
     return;
   }
 
@@ -213,7 +237,7 @@ async function searchCity() {
   isLoading = true;
 
   searchBtn.disabled = true;
-  searchBtn.textContent = "Loading...";
+  searchBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`;
 
   try {
     await fetchWeather(city);
@@ -221,11 +245,42 @@ async function searchCity() {
     isLoading = false;
 
     searchBtn.disabled = false;
-    searchBtn.textContent = "Search";
+    searchBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
 
     searchInput.value = "";
     searchInput.focus();
   }
+}
+
+function getCurrentLocation() {
+  if (isLoading) return;
+
+  isLoading = true;
+
+  locationBtn.disabled = true;
+
+  if (!navigator.geolocation) {
+    isLoading = false;
+    locationBtn.disabled = false;
+    showToast("Geolocation is not supported by your browser.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+
+      fetchWeatherByCoords(latitude, longitude).finally(() => {
+        isLoading = false;
+        locationBtn.disabled = false;
+      });
+    },
+    () => {
+      isLoading = false;
+      locationBtn.disabled = false;
+      showToast("Unable to access your location.");
+    },
+  );
 }
 
 function resetUI() {
@@ -248,10 +303,36 @@ function resetUI() {
   document.body.classList.add("shower-rain");
 }
 
+let toastTimer;
+
+function showToast(message) {
+  toastArea.textContent = message;
+
+  toastArea.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    toastArea.classList.remove("show");
+  }, 3000);
+}
+
 searchBtn.addEventListener("click", searchCity);
 
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && !isLoading) {
     searchCity();
+  }
+});
+
+locationBtn.addEventListener("click", getCurrentLocation);
+
+window.addEventListener("load", () => {
+  const lastCity = localStorage.getItem("lastCity");
+
+  if (lastCity) {
+    fetchWeather(lastCity);
+  } else {
+    getCurrentLocation();
   }
 });

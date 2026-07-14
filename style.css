@@ -180,6 +180,28 @@ main {
   cursor: not-allowed;
 }
 
+/*current location btn*/
+#location-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s ease;
+}
+
+#location-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
 /*Weather Card*/
 #weather-card {
   background: var(--frosted-glass-background);
@@ -390,6 +412,35 @@ main {
 #sun-set {
   font-size: 22px;
   font-weight: 700;
+}
+
+/*toast msg*/
+#toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  background: rgba(40, 40, 40, 0.9);
+  color: white;
+
+  padding: 14px 20px;
+  border-radius: 12px;
+
+  backdrop-filter: blur(15px);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateY(-20px);
+
+  transition: all 0.3s ease;
+
+  z-index: 9999;
+}
+#toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /*js-classes for dynamic background*/
