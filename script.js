@@ -25,7 +25,7 @@ const sunset = document.querySelector("#sun-set");
 const toastArea = document.querySelector("#toast");
 
 //Constants
-const API_KEY = "c58bc56b08a9b09689154cb47412e873";
+const API_KEY = CONFIG.API_KEY;
 
 const ICON_CHANGE_DELAY = 180;
 
@@ -99,6 +99,19 @@ const weatherConfig = {
   "50n": { background: "mist", clouds: 2, rain: false },
 };
 
+//UI Constants
+const resetElements = [
+  weatherCond,
+  dayDate,
+  feelLike,
+  humidity,
+  windSpeed,
+  visibility,
+  pressure,
+  sunrise,
+  sunset,
+];
+
 //Global Variables
 let isLoading = false;
 let toastTimer;
@@ -162,19 +175,6 @@ async function getWeatherData(url) {
 
   return await response.json();
 }
-
-//UI Constants
-const resetElements = [
-  weatherCond,
-  dayDate,
-  feelLike,
-  humidity,
-  windSpeed,
-  visibility,
-  pressure,
-  sunrise,
-  sunset,
-];
 
 //UI Functions
 function updateWeatherInfo(data) {
