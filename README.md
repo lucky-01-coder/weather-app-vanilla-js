@@ -95,7 +95,8 @@ Now simply open **index.html** in your browser.
 
 ## 🌐 Live Demo
 
-Coming Soon...
+👉 **Live Website:**  
+https://lucky-01-coder.github.io/ritudarpan/
 
 ---
 
